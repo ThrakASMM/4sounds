@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ear Training — Accords à 4 sons</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Garde tout visible même si un style masque des blocs */
+    .triad-selects { display:block !important; }
+    .triad-selects select { min-width:180px; margin-right:8px; }
+    #chord-checks { display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
+    #chord-checks label { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border:1px solid #ddd; border-radius:8px; background:#fff; }
+  </style>
+</head>
+<body>
+  <!-- En-tête -->
+  <header class="menu-hdr">
+    <div>
+      <h1>Ear Training — Accords à 4 sons</h1>
+      <p class="subtitle">Reconnaissance des tétrades et renversements</p>
+    </div>
+    <img src="logo.png" alt="Logo ASMM" class="hdr-logo" />
+  </header>
+
+  <!-- MENU -->
+  <main id="menu">
+    <div class="card">
+      <h2>Type de jeu</h2>
+      <label><input type="radio" name="gametype" value="training" checked> Entraînement</label>
+      <label style="margin-left:14px;"><input type="radio" name="gametype" value="test"> Test (10 questions)</label>
+    </div>
+
+    <div class="card">
+      <h2>Mode</h2>
+      <label><input type="radio" name="mode" value="sequential" checked> Séparé (notes séquentielles)</label>
+      <label style="margin-left:14px;"><input type="radio" name="mode" value="simultaneous"> Simultané (accord joué ensemble)</label>
+    </div>
+
+    <div class="card" id="chord-picker">
+      <h2>Familles d'accords incluses</h2>
+
+      <!-- ✅ Cases statiques -->
+      <div id="chord-checks">
+        <label><input type="checkbox" value="Maj7"  checked> Maj7</label>
+        <label><input type="checkbox" value="Min7"  checked> Min7</label>
+        <label><input type="checkbox" value="7sus4" checked> 7sus4</label>
+        <label><input type="checkbox" value="7"     checked> 7 (dominante)</label>
+        <label><input type="checkbox" value="-7b5"  checked> Min7♭5</label>
+      </div>
+
+      <div class="buttons-bottom" style="justify-content:flex-start">
+        <button id="select-all-chords" class="ctrl-btn white" type="button">Tout sélectionner</button>
+        <button id="deselect-all-chords" class="ctrl-btn white" type="button">Tout désélectionner</button>
+        <span id="selected-count" style="align-self:center;margin-left:8px;"></span>
+      </div>
+      <p id="chord-warning" style="color:#d71e14;display:none;margin:6px 0 0;">⚠️ Sélectionnez au moins une famille.</p>
+    </div>
+
+    <button id="start-game" class="validate-btn" style="max-width:960px;" type="button">Commencer</button>
+  </main>
+
+  <!-- JEU -->
+  <main id="game" style="display:none;">
+    <div class="hud">
+      <div class="hud-left">
+        <div id="progress">Question 0/10</div>
+        <div id="score">Score : 0</div>
+      </div>
+      <div id="timing">Temps: 0.0s</div>
+    </div>
+
+    <div id="question" class="card"></div>
+
+    <!-- Sélecteurs de réponse -->
+    <div class="card triad-selects">
+      <select id="chord-select"></select>
+      <select id="inversion-select"></select>
+      <select id="fundamental-select"></select>
+    </div>
+
+    <button id="submit-answer" class="validate-btn" type="button">Valider</button>
+
+    <div id="validation-message" class="feedback"></div>
+    <div id="result"></div>
+
+    <div class="buttons-bottom">
+      <button id="replay-single-and-chord" class="ctrl-btn" type="button">Réécouter (note + accord)</button>
+      <button id="replay-chord-only" class="ctrl-btn" type="button">Réécouter (accord seul)</button>
+      <button id="next-question" class="ctrl-btn" type="button">Question suivante</button>
+      <button id="restart-test" class="ctrl-btn" type="button">Recommencer le test</button>
+      <button id="back-to-menu" class="ctrl-btn white" style="width:100%;" type="button">Menu</button>
+    </div>
+  </main>
+
+  <footer class="app-footer">© 2025 — Guillaume Estace / ASMM — V4</footer>
+
+  <!-- 👇 même nom que ta version triade -->
+  <script src="script.js"></script>
+</body>
+</html>
